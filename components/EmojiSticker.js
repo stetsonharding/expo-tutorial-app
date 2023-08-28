@@ -10,17 +10,37 @@ import Animated, {
 
 
 export default function EmojiSticker({ imageSize, stickerSource }) {
-  const scaleIamge = useSharedValue(imageSize)
+  const scaleImage = useSharedValue(imageSize)
 
-  const animateImage = Animated.createAnimatedComponent();
+  const AnimateImage = Animated.createAnimatedComponent(Image);
+ 
+  const imageStyle = useAnimatedStyle(() => {
+    return{
+      width: withSpring(scaleImage.value),
+      height: withSpring(scaleImage.value)
+    }
+  })
+
+  const onDoubleTap = useAnimatedGestureHandler({
+    onActive: () => {
+      if(scaleImage.value !== imageSize * 2) {
+        scaleImage.value = imageSize * 2;
+    }
+  },
+  }) 
+  
 
   return (
     <View style={{ top: -350 }}>
-      <animateImage
+      <TapGestureHandler onGestureEvent={onDoubleTap} numberOfTaps={2}> 
+
+      <AnimateImage
         source={stickerSource}
         resizeMode="contain"
-        style={{ width: imageSize, height: imageSize }}
+        style={[imageStyle, {width: imageSize, height: imageSize}]}
       />
+
+      </TapGestureHandler>
     </View>
   );
 }

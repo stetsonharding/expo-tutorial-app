@@ -6,10 +6,15 @@ import ImageViewer from "./components/ImageViewer";
 import Button from "./components/Button";
 import CircleButton from "./components/CircleButton";
 import IconButton from "./components/IconButton";
+import EmojiPicker from "./components/EmojiPicker";
+import EmojiList from "./components/EmojiList";
+import EmojiSticker from "./components/EmojiSticker";
 
 export default function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAppOptionsShown, setIsAppOptionsShown] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [pickedEmoji, setPickedEmoji] = useState(null)
   const placeholderImage = require("./assets/images/background-image.png");
 
   //Function to handle image picking
@@ -30,11 +35,18 @@ export default function App() {
 
   const onReset = () => {
     setIsAppOptionsShown(false)
+    
   };
 
-  const onAddSticker = () => {};
+  const onAddSticker = () => {
+    setIsModalVisible(true)
+  };
 
   const onSaveImageAsync = () => {};
+
+  const onModalClose = () => {
+    setIsModalVisible(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -43,6 +55,7 @@ export default function App() {
           placeholderImage={placeholderImage}
           selectedImage={selectedImage}
         />
+        {pickedEmoji && <EmojiSticker stickerSource={pickedEmoji} imageSize={40} />}
       </View>
       {isAppOptionsShown ? (
         <View style={styles.optionsContainer}>
@@ -69,7 +82,9 @@ export default function App() {
           />
         </View>
       )}
-
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+      </EmojiPicker>
       <StatusBar style="auto" />
     </View>
   );
@@ -97,6 +112,7 @@ const styles = StyleSheet.create({
   optionsContainer: {
     position: "absolute",
     bottom: 80,
+  
   },
   optionsRow: {
     alignItems: "center",

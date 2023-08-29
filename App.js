@@ -44,7 +44,9 @@ export default function App() {
     setIsModalVisible(true)
   };
 
-  const onSaveImageAsync = () => {};
+  const onSaveImageAsync = () => {
+   
+  };
 
   const onModalClose = () => {
     setIsModalVisible(false)

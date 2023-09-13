@@ -136,7 +136,7 @@ export default function App() {
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
       </EmojiPicker>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </GestureHandlerRootView>
   );
 }
@@ -169,4 +169,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
+  
 });

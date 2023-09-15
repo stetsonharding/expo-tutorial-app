@@ -14,19 +14,13 @@ Before you begin, ensure you have the following installed on your machine:
 
 ### Installation
 
-1. Clone this repository to your local machine.
+1. Change into the project directory.
 
    ```bash
-   git clone https://github.com/yourusername/expo-sticker-app.git
+   cd expo-tutorial-app
    ```
 
-2. Change into the project directory.
-
-   ```bash
-   cd expo-sticker-app
-   ```
-
-3. Install the project dependencies.
+2. Install the project dependencies.
 
    ```bash
    npm install
